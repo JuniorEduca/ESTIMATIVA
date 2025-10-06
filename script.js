@@ -6,22 +6,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+
         const posCasa = parseInt(document.getElementById('classCasa').value);
         const posFora = parseInt(document.getElementById('classFora').value);
 
-        const diff = posFora - posCasa;
-        let vitoria = 50 + (diff * 1.5);
-        let derrota = 50 - (diff * 1.5);
-        let empate = 100 - (vitoria + derrota);
+        if (isNaN(posCasa) || isNaN(posFora)) return;
 
-        vitoria = Math.max(10, Math.min(80, vitoria));
-        derrota = Math.max(10, Math.min(80, derrota));
-        empate = 100 - (vitoria + derrota);
+        // Força baseada em posição
+        const forcaCasa = (21 - posCasa) / 20;
+        const forcaFora = (21 - posFora) / 20;
+
+        // Vantagem do mandante (10%)
+        const vantagemCasa = 0.1;
+
+        let probCasa = forcaCasa + vantagemCasa;
+        let probFora = forcaFora;
+        let total = probCasa + probFora;
+
+        // Normaliza 80% para vitória/derrota, 20% para empate ajustado
+        probCasa = (probCasa / total) * 0.8;
+        probFora = (probFora / total) * 0.8;
+
+        // Empate dinâmico (maior se forças próximas)
+        const diff = Math.abs(posCasa - posFora);
+        let probEmpate = Math.max(0.15, 0.35 - diff * 0.01);
+
+        const soma = probCasa + probFora + probEmpate;
+        probCasa /= soma;
+        probFora /= soma;
+        probEmpate /= soma;
+
+        const vitoria = (probCasa * 100).toFixed(1) + "%";
+        const empate = (probEmpate * 100).toFixed(1) + "%";
+        const derrota = (probFora * 100).toFixed(1) + "%";
 
         mostrarResultado({
-            vitoria: vitoria.toFixed(1) + '%',
-            empate: empate.toFixed(1) + '%',
-            derrota: derrota.toFixed(1) + '%',
+            vitoria, empate, derrota,
             escanteios: (7 + Math.random() * 3).toFixed(1),
             gols: (2 + Math.random()).toFixed(1)
         });
@@ -39,9 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clearBtn.addEventListener('click', () => {
         form.reset();
-        hideResultado();
+        resultado.classList.add('hidden');
         resetResultadoText();
-        document.getElementById('campeonato').focus();
     });
 
     function mostrarResultado(dados) {
@@ -52,10 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('escanteios').textContent = `Escanteios: ${dados.escanteios}`;
         document.getElementById('gols').textContent = `Gols: ${dados.gols}`;
         resultado.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600 });
-    }
-
-    function hideResultado() {
-        resultado.classList.add('hidden');
     }
 
     function resetResultadoText() {
