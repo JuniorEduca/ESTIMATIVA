@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimador de Apostas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1><i class="fa-solid fa-futbol"></i> Estimador de Apostas</h1>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="form-section card">
+            <h2><i class="fa-solid fa-list-check"></i> Simule sua Partida</h2>
+            <form id="betForm" class="form-grid">
+                <div class="form-group">
+                    <label for="campeonato"><i class="fa-solid fa-trophy"></i> Campeonato:</label>
+                    <input type="text" id="campeonato" placeholder="Ex: Brasileirão" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeCasa"><i class="fa-solid fa-shield-halved"></i> Time da Casa:</label>
+                    <input type="text" id="timeCasa" placeholder="Digite o mandante" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="classCasa"><i class="fa-solid fa-ranking-star"></i> Posição do Mandante:</label>
+                    <select id="classCasa" required>
+                        <option value="">Selecione</option>
+                        <option value="1">1º</option>
+<option value="2">2º</option>
+<option value="3">3º</option>
+<option value="4">4º</option>
+<option value="5">5º</option>
+<option value="6">6º</option>
+<option value="7">7º</option>
+<option value="8">8º</option>
+<option value="9">9º</option>
+<option value="10">10º</option>
+<option value="11">11º</option>
+<option value="12">12º</option>
+<option value="13">13º</option>
+<option value="14">14º</option>
+<option value="15">15º</option>
+<option value="16">16º</option>
+<option value="17">17º</option>
+<option value="18">18º</option>
+<option value="19">19º</option>
+<option value="20">20º</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeFora"><i class="fa-solid fa-shield"></i> Time Visitante:</label>
+                    <input type="text" id="timeFora" placeholder="Digite o visitante" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="classFora"><i class="fa-solid fa-ranking-star"></i> Posição do Visitante:</label>
+                    <select id="classFora" required>
+                        <option value="">Selecione</option>
+                        <option value="1">1º</option>
+<option value="2">2º</option>
+<option value="3">3º</option>
+<option value="4">4º</option>
+<option value="5">5º</option>
+<option value="6">6º</option>
+<option value="7">7º</option>
+<option value="8">8º</option>
+<option value="9">9º</option>
+<option value="10">10º</option>
+<option value="11">11º</option>
+<option value="12">12º</option>
+<option value="13">13º</option>
+<option value="14">14º</option>
+<option value="15">15º</option>
+<option value="16">16º</option>
+<option value="17">17º</option>
+<option value="18">18º</option>
+<option value="19">19º</option>
+<option value="20">20º</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="data"><i class="fa-solid fa-calendar-days"></i> Data:</label>
+                    <input type="date" id="data" required>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn primary">
+                        <i class="fa-solid fa-play"></i> Estimar
+                    </button>
+                    <button type="button" id="demoBtn" class="btn secondary">
+                        <i class="fa-solid fa-database"></i> Dados de Exemplo
+                    </button>
+                    <button type="button" id="clearBtn" class="btn tertiary">
+                        <i class="fa-solid fa-eraser"></i> Limpar
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section id="resultado" class="resultado card hidden">
+            <h2><i class="fa-solid fa-chart-pie"></i> Resultado da Estimativa</h2>
+            <div class="cards-grid">
+                <div class="result-card">
+                    <i class="fa-solid fa-trophy"></i>
+                    <p id="vitoria">Vitória Mandante: -</p>
+                </div>
+                <div class="result-card">
+                    <i class="fa-solid fa-hand"></i>
+                    <p id="empate">Empate: -</p>
+                </div>
+                <div class="result-card">
+                    <i class="fa-solid fa-trophy"></i>
+                    <p id="derrota">Vitória Visitante: -</p>
+                </div>
+                <div class="result-card">
+                    <i class="fa-solid fa-flag"></i>
+                    <p id="escanteios">Escanteios: -</p>
+                </div>
+                <div class="result-card">
+                    <i class="fa-solid fa-futbol"></i>
+                    <p id="gols">Gols: -</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Estimador de Apostas • Feito com <i class="fa-solid fa-heart"></i> pelo seu criador</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
